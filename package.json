@@ -1,0 +1,15 @@
+{
+  "name": "wfhroulette",
+  "version": "1.0.0",
+  "description": "Randomly (but deterministically) pick one Work-From-Home day per ISO week (Mon–Fri only) and get a sarcastic excuse.",
+  "type": "module",
+  "bin": {
+    "wfhroulette": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node ./src/cli.js",
+    "web": "node ./web/server.js",
+    "test": "node ./src/cli.js --help"
+  },
+  "license": "MIT"
+}
