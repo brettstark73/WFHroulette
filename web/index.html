@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WFHroulette 🎲</title>
+    <style>
+      :root {
+        font-family: "Inter", "Segoe UI", sans-serif;
+        background: #f5f5f7;
+        color: #1f1f24;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .card {
+        background: #ffffff;
+        box-shadow: 0 12px 30px rgba(31, 31, 36, 0.12);
+        border-radius: 16px;
+        padding: 2.5rem;
+        max-width: 480px;
+        width: 100%;
+      }
+
+      h1 {
+        margin-top: 0;
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #d1d1d6;
+        border-radius: 10px;
+        font-size: 1rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.85rem;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        border: none;
+        border-radius: 10px;
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
+      }
+
+      .result {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+        background: #f4f3ff;
+        border: 1px solid #dadaff;
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .result strong {
+        font-size: 1.1rem;
+      }
+
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>WFHroulette 🎲</h1>
+      <label for="seed">Seed</label>
+      <input id="seed" type="text" placeholder="e.g. design-team" />
+
+      <label for="date">ISO Week Anchor (optional)</label>
+      <input id="date" type="date" />
+
+      <button id="pick">Pick my WFH day</button>
+
+      <section class="result" id="result">
+        <strong>Let's find your sanctioned sweatpants day.</strong>
+        <span>Pick a seed and optional date, then tap the button.</span>
+      </section>
+
+      <footer>Deterministic hijinks powered by a humble hash.</footer>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
