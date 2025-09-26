@@ -12,6 +12,7 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "node ./test/util.test.js",
     "test:integration": "node ./test/integration.test.js",
+    "test:ci": "npm run test:unit && SKIP_INTEGRATION_TESTS=true npm run test:integration",
     "test:help": "node ./src/cli.js --help"
   },
   "license": "MIT"

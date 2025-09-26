@@ -29,6 +29,27 @@ npm run web
 
 Then open the printed URL (usually <http://localhost:3000/web/>). Enter your seed and optional date, hit **Pick**, and bask in your sanctioned remote day and excuse.
 
+## Testing
+
+**Run all tests:**
+```bash
+npm test                 # Unit + integration tests
+```
+
+**Run specific test suites:**
+```bash
+npm run test:unit        # Core logic tests only
+npm run test:integration # Browser/server tests only
+npm run test:ci          # CI-safe mode (skips integration if ports blocked)
+```
+
+**Test coverage includes:**
+- Deterministic hashing and date calculations
+- ISO week handling and edge cases
+- Web server integration and asset loading
+- XSS vulnerability detection
+- HTML structure and DOM validation
+
 ## Config/Extending
 
 - Add or tweak excuses in [`reasons.json`](./reasons.json).
