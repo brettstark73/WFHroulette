@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "deployment": {
+    "protection": "none"
+  },
   "rewrites": [
     {
       "source": "/",
