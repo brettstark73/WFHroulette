@@ -50,6 +50,15 @@ function currentDateISO() {
   return iso;
 }
 
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function renderResult(seed, baseDate) {
   try {
     const normalizedSeed = seed.trim() || "default";
@@ -57,16 +66,32 @@ function renderResult(seed, baseDate) {
     const reason = pickReason(normalizedSeed, result, reasons);
     const formatted = formatDay(result.date);
 
-    resultEl.innerHTML = `
-      <strong>${formatted}</strong>
-      <span>Excuse: ${reason}</span>
-      <small>Seed: <code>${normalizedSeed}</code> · ISO week ${result.isoYear}-W${String(result.isoWeek).padStart(2, "0")}</small>
-    `;
+    // Clear and build DOM safely
+    resultEl.innerHTML = '';
+
+    const dateStrong = document.createElement('strong');
+    dateStrong.textContent = formatted;
+
+    const reasonSpan = document.createElement('span');
+    reasonSpan.textContent = `Excuse: ${reason}`;
+
+    const metaSmall = document.createElement('small');
+    metaSmall.innerHTML = `Seed: <code>${escapeHtml(normalizedSeed)}</code> · ISO week ${result.isoYear}-W${String(result.isoWeek).padStart(2, "0")}`;
+
+    resultEl.appendChild(dateStrong);
+    resultEl.appendChild(reasonSpan);
+    resultEl.appendChild(metaSmall);
   } catch (error) {
-    resultEl.innerHTML = `
-      <strong>Something went sideways.</strong>
-      <span>${error.message}</span>
-    `;
+    resultEl.innerHTML = '';
+
+    const errorStrong = document.createElement('strong');
+    errorStrong.textContent = 'Something went sideways.';
+
+    const errorSpan = document.createElement('span');
+    errorSpan.textContent = error.message;
+
+    resultEl.appendChild(errorStrong);
+    resultEl.appendChild(errorSpan);
   }
 }
 
