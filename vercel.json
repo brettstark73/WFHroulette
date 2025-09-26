@@ -1,29 +1,17 @@
 {
   "version": 2,
-  "name": "wfh-roulette",
-  "builds": [
+  "rewrites": [
     {
-      "src": "web/server.js",
-      "use": "@vercel/node"
+      "source": "/",
+      "destination": "/web/index.html"
     },
     {
-      "src": "web/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/web/(.*)",
-      "dest": "/web/$1"
+      "source": "/web",
+      "destination": "/web/index.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/web/index.html"
+      "source": "/web/(.*)",
+      "destination": "/web/$1"
     }
-  ],
-  "functions": {
-    "web/server.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
