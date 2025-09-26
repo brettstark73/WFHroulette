@@ -1,9 +1,6 @@
 import { pickWFHDay, pickReason, formatDay } from "../src/util.js";
 
-const seedInput = document.getElementById("seed");
-const dateInput = document.getElementById("date");
-const resultEl = document.getElementById("result");
-const button = document.getElementById("pick");
+let seedInput, dateInput, resultEl, button;
 
 const FALLBACK_REASONS = [
   "The espresso machine unionized again and refuses to froth without a formal escalation.",
@@ -73,24 +70,30 @@ function renderResult(seed, baseDate) {
   }
 }
 
-button.addEventListener("click", () => {
-  const seed = seedInput.value;
-  const dateValue = dateInput.value;
-  const baseDate = dateValue ? new Date(`${dateValue}T00:00:00Z`) : new Date();
-  if (Number.isNaN(baseDate.getTime())) {
-    resultEl.innerHTML = `
-      <strong>That date looked weird.</strong>
-      <span>Please use YYYY-MM-DD format.</span>
-    `;
-    return;
-  }
-  renderResult(seed, baseDate);
-});
 
 function init() {
+  seedInput = document.getElementById("seed");
+  dateInput = document.getElementById("date");
+  resultEl = document.getElementById("result");
+  button = document.getElementById("pick");
+
   dateInput.value = currentDateISO();
   renderResult("default", new Date(`${dateInput.value}T00:00:00Z`));
   loadReasons();
+
+  button.addEventListener("click", () => {
+    const seed = seedInput.value;
+    const dateValue = dateInput.value;
+    const baseDate = dateValue ? new Date(`${dateValue}T00:00:00Z`) : new Date();
+    if (Number.isNaN(baseDate.getTime())) {
+      resultEl.innerHTML = `
+        <strong>That date looked weird.</strong>
+        <span>Please use YYYY-MM-DD format.</span>
+      `;
+      return;
+    }
+    renderResult(seed, baseDate);
+  });
 }
 
 init();
