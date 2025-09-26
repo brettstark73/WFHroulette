@@ -103,30 +103,51 @@ npm test                # Show CLI help (basic test)
 
 ## Testing Strategy
 
-### Manual Testing Checklist
-- [ ] CLI help display (`wfhroulette --help`)
-- [ ] CLI with different seeds produces different results
-- [ ] CLI with same seed+date produces identical results
-- [ ] CLI JSON output format validation
-- [ ] Web app loads and displays initial result
-- [ ] Web app seed input changes results
-- [ ] Web app date input affects ISO week calculation
-- [ ] Web app handles invalid dates gracefully
-- [ ] Both interfaces use same underlying logic (results match)
+### Automated Test Suite
+**Comprehensive testing with 19 automated tests:**
 
-### Edge Cases
-- [ ] ISO week boundaries (Dec 31 → Jan 1)
-- [ ] Leap year handling
-- [ ] Empty/invalid seed handling
-- [ ] Missing reasons.json fallback (web app only)
+```bash
+npm test                 # Full suite (unit + integration)
+npm run test:unit        # 12 unit tests for core logic
+npm run test:integration # 7 browser/server integration tests
+npm run test:ci          # CI-safe mode (skips integration if ports blocked)
+```
+
+### Unit Test Coverage (`test/util.test.js`)
+- **Hash function**: Consistency, edge cases, null/undefined handling
+- **ISO week calculations**: Known dates, year boundaries, Monday alignment
+- **WFH day selection**: Deterministic behavior, weekday validation (Mon-Fri)
+- **Reason selection**: Deterministic picking, error handling, input validation
+- **Date formatting**: Correct output, different date handling
+- **Integration workflow**: End-to-end logic validation
+
+### Browser Integration Tests (`test/integration.test.js`)
+- **Server startup/shutdown**: Automated lifecycle management
+- **Asset loading**: Script paths, module accessibility, CSS presence
+- **HTML structure**: Required DOM elements, form inputs, button text
+- **HTTP responses**: Status codes, content validation, error handling
+- **Security scanning**: XSS pattern detection in static content
+- **File accessibility**: JavaScript modules, JSON data, utility functions
+
+### CI/Sandbox Support
+- **Graceful fallback**: Skips integration tests when port binding blocked
+- **Environment control**: `SKIP_INTEGRATION_TESTS=true` flag
+- **Error detection**: Handles EPERM/EACCES/EADDRINUSE gracefully
 
 ## Security & Best Practices
+
+### Security Fixes Implemented
+- **XSS vulnerability eliminated**: Replaced dangerous `innerHTML` with safe DOM construction
+- **Input sanitization**: HTML escaping function for user-provided seeds
+- **Attack vector closed**: Malicious inputs like `<img src=x onerror=alert(1)>` now harmless
+- **Automated security testing**: Integration tests scan for XSS patterns in static content
 
 ### Current Implementation
 - **Path traversal protection**: Server validates file paths within project root
 - **No user input persistence**: All selections are ephemeral
 - **No external dependencies**: Reduces supply chain attack surface
 - **Client-side only secrets**: No server-side data storage
+- **Safe DOM manipulation**: Uses `textContent` and `createElement()` instead of `innerHTML`
 
 ### Maintenance Notes
 - **reasons.json**: Can be edited to add/remove/modify excuses
