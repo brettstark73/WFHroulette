@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node ./src/cli.js",
     "web": "node ./web/server.js",
-    "test": "node ./src/cli.js --help"
+    "test": "node ./test/util.test.js",
+    "test:help": "node ./src/cli.js --help"
   },
   "license": "MIT"
 }
