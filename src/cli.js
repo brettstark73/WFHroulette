@@ -11,13 +11,14 @@ function showHelp() {
   console.log(`WFHroulette CLI
 
 Usage:
-  wfhroulette [--seed value] [--date YYYY-MM-DD] [--json]
+  wfhroulette [--seed value] [--date YYYY-MM-DD] [--employee-id value] [--json]
 
 Options:
-  --seed <value>       Seed to use for deterministic hashing (default: "default").
-  --date YYYY-MM-DD    Anchor date for ISO week calculation (default: today).
-  --json               Output JSON instead of formatted text.
-  --help               Show this help message.
+  --seed <value>        Seed to use for deterministic hashing (default: "default").
+  --date YYYY-MM-DD     Anchor date for ISO week calculation (default: today).
+  --employee-id <value> Employee ID for unique excuse selection (optional).
+  --json                Output JSON instead of formatted text.
+  --help                Show this help message.
 `);
 }
 
@@ -25,6 +26,7 @@ function parseArgs(argv) {
   const options = {
     seed: "default",
     date: null,
+    employeeId: null,
     json: false,
     help: false
   };
@@ -54,6 +56,15 @@ function parseArgs(argv) {
     }
     if (arg === "--date") {
       options.date = argv[i + 1] ?? null;
+      i += 1;
+      continue;
+    }
+    if (arg.startsWith("--employee-id=")) {
+      options.employeeId = arg.slice(14);
+      continue;
+    }
+    if (arg === "--employee-id") {
+      options.employeeId = argv[i + 1] ?? null;
       i += 1;
       continue;
     }
@@ -87,7 +98,7 @@ function main() {
 
   const reasons = loadReasons();
   const result = pickWFHDay(options.seed, baseDate);
-  const reason = pickReason(options.seed, result, reasons);
+  const reason = pickReason(options.seed, result, reasons, options.employeeId);
   const formatted = formatDay(result.date);
   const isoDate = result.date.toISOString().slice(0, 10);
 
@@ -96,6 +107,7 @@ function main() {
       JSON.stringify(
         {
           seed: options.seed,
+          employeeId: options.employeeId,
           isoWeek: result.isoWeek,
           isoYear: result.isoYear,
           date: isoDate,
@@ -109,8 +121,9 @@ function main() {
     return;
   }
 
+  const employeeInfo = options.employeeId ? ` (employee: ${options.employeeId})` : "";
   console.log(
-    `WFH Day for seed "${options.seed}" (ISO week ${result.isoYear}-W${String(result.isoWeek).padStart(2, "0")})\n  ${formatted}\nExcuse: ${reason}`
+    `WFH Day for seed "${options.seed}"${employeeInfo} (ISO week ${result.isoYear}-W${String(result.isoWeek).padStart(2, "0")})\n  ${formatted}\nExcuse: ${reason}`
   );
 }
 

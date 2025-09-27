@@ -47,7 +47,7 @@ export function pickWFHDay(seed = "default", dateInput = new Date()) {
   return { date: wfhDate, isoYear: info.year, isoWeek: info.week };
 }
 
-export function pickReason(seed = "default", weekInfo, reasons = []) {
+export function pickReason(seed = "default", weekInfo, reasons = [], employeeId = null) {
   if (!Array.isArray(reasons) || reasons.length === 0) {
     throw new Error("reasons array must contain at least one item");
   }
@@ -55,7 +55,10 @@ export function pickReason(seed = "default", weekInfo, reasons = []) {
   if (typeof isoYear !== "number" || typeof isoWeek !== "number") {
     throw new Error("weekInfo with isoYear and isoWeek is required");
   }
-  const base = `${seed}|${isoYear}|${isoWeek}|reason`;
+  // Add employeeId to make each team member get different excuses
+  const base = employeeId
+    ? `${seed}|${isoYear}|${isoWeek}|reason|${employeeId}`
+    : `${seed}|${isoYear}|${isoWeek}|reason`;
   const index = simpleHash(base) % reasons.length;
   return reasons[index];
 }
