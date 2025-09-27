@@ -121,10 +121,7 @@ function main() {
     return;
   }
 
-  const employeeInfo = options.employeeId ? ` (employee: ${options.employeeId})` : "";
-  console.log(
-    `WFH Day for seed "${options.seed}"${employeeInfo} (ISO week ${result.isoYear}-W${String(result.isoWeek).padStart(2, "0")})\n  ${formatted}\nExcuse: ${reason}`
-  );
+  console.log(`${formatted}\nExcuse: ${reason}`);
 }
 
 main();

@@ -61,13 +61,8 @@ function renderResult(seed, baseDate, employeeId = null) {
     const reasonSpan = document.createElement('span');
     reasonSpan.textContent = `Excuse: ${reason}`;
 
-    const metaSmall = document.createElement('small');
-    const employeeInfo = normalizedEmployeeId ? ` · Employee: <code>${escapeHtml(normalizedEmployeeId)}</code>` : '';
-    metaSmall.innerHTML = `Seed: <code>${escapeHtml(normalizedSeed)}</code>${employeeInfo} · ISO week ${result.isoYear}-W${String(result.isoWeek).padStart(2, "0")}`;
-
     resultEl.appendChild(dateStrong);
     resultEl.appendChild(reasonSpan);
-    resultEl.appendChild(metaSmall);
   } catch (error) {
     resultEl.innerHTML = '';
 
