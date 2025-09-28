@@ -53,3 +53,17 @@ jobs:
 
     - name: Check for syntax errors
       run: node --check src/*.js web/*.js test/*.js
+
+    - name: Security audit
+      run: npm audit --audit-level high
+
+    - name: Check for hardcoded secrets
+      run: |
+        # Check for common secret patterns
+        if grep -r -E "(password|secret|key|token).*[=:].*['\"][^'\"]{8,}" src/ web/ --exclude-dir=node_modules || \
+           grep -r -E "-----BEGIN.*KEY-----" src/ web/ --exclude-dir=node_modules; then
+          echo "❌ Potential hardcoded secrets found"
+          exit 1
+        else
+          echo "✅ No hardcoded secrets detected"
+        fi
