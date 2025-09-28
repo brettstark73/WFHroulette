@@ -4,6 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>WFHroulette 🎲</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/web/favicon.svg" />
+
+    <!-- Social Media Meta Tags -->
+    <meta name="description" content="Deterministically pick one Work-From-Home day per week with hilariously sarcastic corporate excuses. Perfect for team coordination!" />
+    <meta property="og:title" content="WFHroulette 🎲" />
+    <meta property="og:description" content="Deterministically pick one Work-From-Home day per week with hilariously sarcastic corporate excuses." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wfh.aibuilderlab.com" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="WFHroulette 🎲" />
+    <meta name="twitter:description" content="Deterministically pick one Work-From-Home day per week with hilariously sarcastic corporate excuses." />
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <style>
       :root {
         font-family: "Inter", "Segoe UI", sans-serif;
@@ -27,6 +45,23 @@
         padding: 2.5rem;
         max-width: 480px;
         width: 100%;
+      }
+
+      /* Mobile Optimizations */
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+        .card {
+          padding: 1.5rem;
+          border-radius: 12px;
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        input {
+          font-size: 16px; /* Prevent iOS zoom */
+        }
       }
 
       h1 {
