@@ -63,6 +63,10 @@ function renderResult(seed, baseDate, employeeId = null) {
 
     resultEl.appendChild(dateStrong);
     resultEl.appendChild(reasonSpan);
+
+    // Add highlight animation
+    resultEl.classList.add('highlight');
+    setTimeout(() => resultEl.classList.remove('highlight'), 500);
   } catch (error) {
     resultEl.innerHTML = '';
 
@@ -74,6 +78,10 @@ function renderResult(seed, baseDate, employeeId = null) {
 
     resultEl.appendChild(errorStrong);
     resultEl.appendChild(errorSpan);
+
+    // Add highlight animation for errors too
+    resultEl.classList.add('highlight');
+    setTimeout(() => resultEl.classList.remove('highlight'), 500);
   }
 }
 
@@ -90,18 +98,35 @@ function init() {
   loadReasons();
 
   button.addEventListener("click", () => {
+    // Add loading state
+    button.disabled = true;
+    button.style.opacity = '0.7';
+
     const seed = seedInput.value;
     const employeeId = employeeIdInput.value;
     const dateValue = dateInput.value;
     const baseDate = dateValue ? new Date(`${dateValue}T00:00:00Z`) : new Date();
+
     if (Number.isNaN(baseDate.getTime())) {
-      resultEl.innerHTML = `
-        <strong>That date looked weird.</strong>
-        <span>Please use YYYY-MM-DD format.</span>
-      `;
+      resultEl.innerHTML = '';
+      const errorStrong = document.createElement('strong');
+      errorStrong.textContent = 'That date looked weird.';
+      const errorSpan = document.createElement('span');
+      errorSpan.textContent = 'Please use YYYY-MM-DD format.';
+      resultEl.appendChild(errorStrong);
+      resultEl.appendChild(errorSpan);
+
+      button.disabled = false;
+      button.style.opacity = '1';
       return;
     }
-    renderResult(seed, baseDate, employeeId);
+
+    // Simulate brief loading for better UX
+    setTimeout(() => {
+      renderResult(seed, baseDate, employeeId);
+      button.disabled = false;
+      button.style.opacity = '1';
+    }, 150);
   });
 }
 
