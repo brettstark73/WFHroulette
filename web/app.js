@@ -1,6 +1,6 @@
-import { pickWFHDay, pickReason, formatDay } from "../src/util.js";
+import { pickReason, isoWeekInfo } from "../src/util.js";
 
-let seedInput, employeeIdInput, dateInput, resultEl, button;
+let dayInput, seedInput, employeeIdInput, dateInput, resultEl, button;
 
 const FALLBACK_REASONS = [
   "The espresso machine unionized again and refuses to froth without a formal escalation.",
@@ -44,19 +44,27 @@ function escapeHtml(unsafe) {
     .replace(/'/g, "&#039;");
 }
 
-function renderResult(seed, baseDate, employeeId = null) {
+function renderResult(selectedDay, seed, baseDate, employeeId = null) {
   try {
+    if (!selectedDay) {
+      throw new Error('Please select a WFH day first.');
+    }
+
     const normalizedSeed = seed.trim() || "default";
     const normalizedEmployeeId = employeeId && employeeId.trim() ? employeeId.trim() : null;
-    const result = pickWFHDay(normalizedSeed, baseDate);
-    const reason = pickReason(normalizedSeed, result, reasons, normalizedEmployeeId);
-    const formatted = formatDay(result.date);
+
+    // Get week info for the excuse generation
+    const weekInfo = isoWeekInfo(baseDate);
+    const reason = pickReason(normalizedSeed, { isoYear: weekInfo.year, isoWeek: weekInfo.week }, reasons, normalizedEmployeeId);
+
+    // Format the date as "Oct 8"
+    const dateStr = baseDate.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 
     // Clear and build DOM safely
     resultEl.innerHTML = '';
 
     const dateStrong = document.createElement('strong');
-    dateStrong.textContent = formatted;
+    dateStrong.textContent = `${selectedDay}, ${dateStr} WFH`;
 
     const reasonSpan = document.createElement('span');
     reasonSpan.textContent = `Excuse: ${reason}`;
@@ -87,6 +95,7 @@ function renderResult(seed, baseDate, employeeId = null) {
 
 
 function init() {
+  dayInput = document.getElementById("day");
   seedInput = document.getElementById("seed");
   employeeIdInput = document.getElementById("employee-id");
   dateInput = document.getElementById("date");
@@ -94,7 +103,6 @@ function init() {
   button = document.getElementById("pick");
 
   dateInput.value = currentDateISO();
-  renderResult("default", new Date(`${dateInput.value}T00:00:00Z`));
   loadReasons();
 
   button.addEventListener("click", () => {
@@ -102,6 +110,7 @@ function init() {
     button.disabled = true;
     button.style.opacity = '0.7';
 
+    const selectedDay = dayInput.value;
     const seed = seedInput.value;
     const employeeId = employeeIdInput.value;
     const dateValue = dateInput.value;
@@ -123,7 +132,7 @@ function init() {
 
     // Simulate brief loading for better UX
     setTimeout(() => {
-      renderResult(seed, baseDate, employeeId);
+      renderResult(selectedDay, seed, baseDate, employeeId);
       button.disabled = false;
       button.style.opacity = '1';
     }, 150);

@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
     <linearGradient id="diceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#4338ca;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5b21b6;stop-opacity:1" />
     </linearGradient>
   </defs>
 
   <!-- Dice body with 3D effect -->
   <rect x="15" y="15" width="70" height="70" rx="12" fill="url(#diceGradient)"/>
-  <rect x="15" y="15" width="70" height="70" rx="12" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="15" y="15" width="70" height="70" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
 
-  <!-- Dice dots (showing 5) -->
-  <circle cx="30" cy="30" r="5" fill="white"/>
-  <circle cx="70" cy="30" r="5" fill="white"/>
-  <circle cx="50" cy="50" r="5" fill="white"/>
-  <circle cx="30" cy="70" r="5" fill="white"/>
-  <circle cx="70" cy="70" r="5" fill="white"/>
+  <!-- Dice dots (showing 5) - bold and prominent -->
+  <circle cx="30" cy="30" r="8" fill="white" opacity="0.95"/>
+  <circle cx="70" cy="30" r="8" fill="white" opacity="0.95"/>
+  <circle cx="50" cy="50" r="8" fill="white" opacity="0.95"/>
+  <circle cx="30" cy="70" r="8" fill="white" opacity="0.95"/>
+  <circle cx="70" cy="70" r="8" fill="white" opacity="0.95"/>
 </svg>
