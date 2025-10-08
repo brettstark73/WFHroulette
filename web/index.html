@@ -14,9 +14,14 @@
     <meta property="og:description" content="Generate hilariously sarcastic excuses for your Work-From-Home days" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://wfh.aibuilderlab.com" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://wfh.aibuilderlab.com/web/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="WFHroulette - Pick your WFH day and get the perfect sarcastic excuse" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="WFHroulette 🎲" />
     <meta name="twitter:description" content="Generate hilariously sarcastic excuses for your Work-From-Home days" />
+    <meta name="twitter:image" content="https://wfh.aibuilderlab.com/web/og-image.svg" />
 
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#4f46e5" />
@@ -266,6 +271,37 @@
         line-height: 1.6;
       }
 
+      footer {
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.85rem;
+        text-align: center;
+        z-index: 2;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      footer a {
+        color: rgba(255, 255, 255, 0.95);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+
+      footer a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        footer {
+          font-size: 0.75rem;
+          bottom: 0.5rem;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -324,6 +360,9 @@
         <span>Pick a day and tap the button to generate your excuse.</span>
       </section>
     </main>
+    <footer>
+      © 2025 WFHroulette · <a href="https://github.com/brettstark73/WFHroulette" target="_blank" rel="noopener">Open Source</a> · MIT License
+    </footer>
     <script type="module" src="/web/app.js"></script>
   </body>
 </html>
