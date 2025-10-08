@@ -1,0 +1,86 @@
+name: Claude Code Integration
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, edited]
+
+jobs:
+  claude-response:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
+
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Extract Claude mention
+        id: extract
+        run: |
+          if [ "${{ github.event_name }}" = "issue_comment" ]; then
+            BODY="${{ github.event.comment.body }}"
+            ISSUE_NUMBER="${{ github.event.issue.number }}"
+          else
+            BODY="${{ github.event.issue.body }}"
+            ISSUE_NUMBER="${{ github.event.issue.number }}"
+          fi
+
+          # Extract text after @claude mention
+          TASK=$(echo "$BODY" | sed -n 's/.*@claude[: ]*\(.*\)/\1/p' | head -n 1)
+
+          echo "task=$TASK" >> $GITHUB_OUTPUT
+          echo "issue_number=$ISSUE_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Comment acknowledgment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.extract.outputs.issue_number }},
+              body: '🤖 Claude Code is processing your request...\n\n> ${{ steps.extract.outputs.task }}'
+            })
+
+      - name: Process Claude task
+        id: claude_work
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TASK: ${{ steps.extract.outputs.task }}
+        run: |
+          # This is a placeholder for Claude Code CLI integration
+          # You'll need to configure this based on your Claude Code setup
+          echo "Task to process: $TASK"
+
+          # Example: Run tests, make changes, etc.
+          npm run test:unit
+
+          # Create output summary
+          echo "summary=Task acknowledged. Manual Claude Code session recommended for complex tasks." >> $GITHUB_OUTPUT
+
+      - name: Post results
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.extract.outputs.issue_number }},
+              body: '✅ Claude Code workflow completed.\n\n**Summary:** ${{ steps.claude_work.outputs.summary }}\n\n---\n*For complex tasks, run `claude` in your local repository and reference this issue.*'
+            })
