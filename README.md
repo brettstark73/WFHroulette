@@ -64,26 +64,6 @@ WFH Day for seed "my-team" (ISO week 2025-W39)
 Excuse: My ergonomic chair was reassigned to a visiting consultant's emotional support cactus.
 ```
 
-## GitHub Claude Integration 🤖
-
-Ask Claude questions directly from GitHub issues! Great for mobile access or quick queries.
-
-**Setup (one-time):**
-```bash
-.github/scripts/setup-claude.sh
-```
-
-**Usage from any issue:**
-```
-@claude run the test suite
-@claude explain how the ISO week calculation works
-@claude should we add a feature to refresh excuses?
-```
-
-Claude will respond with answers, execute safe commands (like tests), and provide guidance.
-
-See [.github/CLAUDE_INTEGRATION.md](./.github/CLAUDE_INTEGRATION.md) for full documentation.
-
 ## License
 
 MIT © Brett Stark
