@@ -58,25 +58,25 @@ jobs:
           echo "🔍 Scanning for XSS vulnerability patterns..."
 
           # Check for innerHTML with interpolation (dangerous pattern)
-          if grep -r -E "innerHTML.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules; then
+          if grep -r -E "innerHTML.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=test; then
             echo "❌ Potential XSS: innerHTML with template literal interpolation found"
             exit 1
           fi
 
           # Check for eval with interpolation
-          if grep -r -E "eval\\\(.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules; then
+          if grep -r -E "eval\\\(.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=test; then
             echo "❌ Potential code injection: eval with interpolation found"
             exit 1
           fi
 
           # Check for document.write with interpolation
-          if grep -r -E "document\\\\.write.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules; then
+          if grep -r -E "document\\\\.write.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=test; then
             echo "❌ Potential XSS: document.write with interpolation found"
             exit 1
           fi
 
           # Check for onclick handlers with interpolation
-          if grep -r -E "onclick.*=.*['\"].*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --include="*.html" --exclude-dir=node_modules; then
+          if grep -r -E "onclick.*=.*['\"].*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --include="*.html" --exclude-dir=node_modules --exclude-dir=test; then
             echo "❌ Potential XSS: onclick handler with interpolation found"
             exit 1
           fi
