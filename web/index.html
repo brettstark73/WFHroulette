@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,19 +9,37 @@
     <link rel="icon" type="image/svg+xml" href="/web/favicon.svg" />
 
     <!-- Social Media Meta Tags -->
-    <meta name="description" content="Generate hilariously sarcastic excuses for your Work-From-Home days" />
+    <meta
+      name="description"
+      content="Generate hilariously sarcastic excuses for your Work-From-Home days"
+    />
     <meta property="og:title" content="WFHroulette" />
-    <meta property="og:description" content="Generate hilariously sarcastic excuses for your Work-From-Home days" />
+    <meta
+      property="og:description"
+      content="Generate hilariously sarcastic excuses for your Work-From-Home days"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://wfh.aibuilderlab.com" />
-    <meta property="og:image" content="https://wfh.aibuilderlab.com/web/og-image.png" />
+    <meta
+      property="og:image"
+      content="https://wfh.aibuilderlab.com/web/og-image.png"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="WFHroulette - Pick your WFH day and get the perfect sarcastic excuse" />
+    <meta
+      property="og:image:alt"
+      content="WFHroulette - Pick your WFH day and get the perfect sarcastic excuse"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="WFHroulette" />
-    <meta name="twitter:description" content="Generate hilariously sarcastic excuses for your Work-From-Home days" />
-    <meta name="twitter:image" content="https://wfh.aibuilderlab.com/web/og-image.png" />
+    <meta
+      name="twitter:description"
+      content="Generate hilariously sarcastic excuses for your Work-From-Home days"
+    />
+    <meta
+      name="twitter:image"
+      content="https://wfh.aibuilderlab.com/web/og-image.png"
+    />
 
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#4f46e5" />
@@ -33,7 +51,9 @@
       }
 
       :root {
-        font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto,
+          sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #1f1f24;
         line-height: 1.6;
@@ -51,7 +71,8 @@
       }
 
       @keyframes pulse {
-        0%, 100% {
+        0%,
+        100% {
           transform: scale(1);
         }
         50% {
@@ -79,8 +100,16 @@
         right: 0;
         bottom: 0;
         background:
-          radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+          radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          );
         pointer-events: none;
       }
 
@@ -172,7 +201,7 @@
         max-width: 100%;
       }
 
-      input[type="date"] {
+      input[type='date'] {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -300,7 +329,6 @@
           margin-top: 1.5rem;
         }
       }
-
     </style>
   </head>
   <body>
@@ -308,18 +336,43 @@
       <h1>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
           <defs>
-            <linearGradient id="diceGradientH1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#4338ca;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#5b21b6;stop-opacity:1" />
+            <linearGradient
+              id="diceGradientH1"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" style="stop-color: #4338ca; stop-opacity: 1" />
+              <stop
+                offset="100%"
+                style="stop-color: #5b21b6; stop-opacity: 1"
+              />
             </linearGradient>
           </defs>
-          <rect x="15" y="15" width="70" height="70" rx="12" fill="url(#diceGradientH1)"/>
-          <rect x="15" y="15" width="70" height="70" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-          <circle cx="30" cy="30" r="8" fill="white" opacity="0.95"/>
-          <circle cx="70" cy="30" r="8" fill="white" opacity="0.95"/>
-          <circle cx="50" cy="50" r="8" fill="white" opacity="0.95"/>
-          <circle cx="30" cy="70" r="8" fill="white" opacity="0.95"/>
-          <circle cx="70" cy="70" r="8" fill="white" opacity="0.95"/>
+          <rect
+            x="15"
+            y="15"
+            width="70"
+            height="70"
+            rx="12"
+            fill="url(#diceGradientH1)"
+          />
+          <rect
+            x="15"
+            y="15"
+            width="70"
+            height="70"
+            rx="12"
+            fill="none"
+            stroke="rgba(255,255,255,0.2)"
+            stroke-width="2"
+          />
+          <circle cx="30" cy="30" r="8" fill="white" opacity="0.95" />
+          <circle cx="70" cy="30" r="8" fill="white" opacity="0.95" />
+          <circle cx="50" cy="50" r="8" fill="white" opacity="0.95" />
+          <circle cx="30" cy="70" r="8" fill="white" opacity="0.95" />
+          <circle cx="70" cy="70" r="8" fill="white" opacity="0.95" />
         </svg>
         WFHroulette
       </h1>
@@ -344,7 +397,11 @@
 
       <div class="form-group">
         <label for="employee-id">First Name (optional)</label>
-        <input id="employee-id" type="text" placeholder="e.g. alice, bob, charlie" />
+        <input
+          id="employee-id"
+          type="text"
+          placeholder="e.g. alice, bob, charlie"
+        />
       </div>
 
       <div class="form-group">
@@ -360,7 +417,14 @@
       </section>
     </main>
     <footer>
-      © 2025 WFHroulette · <a href="https://github.com/brettstark73/WFHroulette" target="_blank" rel="noopener">Open Source</a> · MIT License
+      © 2025 WFHroulette ·
+      <a
+        href="https://github.com/brettstark73/WFHroulette"
+        target="_blank"
+        rel="noopener"
+        >Open Source</a
+      >
+      · MIT License
     </footer>
     <script type="module" src="/web/app.js"></script>
   </body>

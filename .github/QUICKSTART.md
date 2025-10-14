@@ -23,17 +23,20 @@ Get your API key from: https://console.anthropic.com/settings/keys
 ## 📱 Usage from GitHub Mobile
 
 ### Create an Issue
+
 ```
 Title: Add new feature
 Body: @claude please add a dark mode theme to the web interface
 ```
 
 ### Comment on Existing Issue
+
 ```
 @claude run the test suite and report results
 ```
 
 ### Example Requests
+
 - `@claude run tests` - Execute test suite
 - `@claude add excuse about coffee` - Add new excuse to reasons.json
 - `@claude fix issue #42` - Work on a specific issue
