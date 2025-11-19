@@ -32,6 +32,7 @@ function parseArgs(argv) {
   }
 
   for (let i = 0; i < argv.length; i += 1) {
+    // eslint-disable-next-line security/detect-object-injection -- Safe: argv is process.argv from trusted source
     const arg = argv[i]
     if (arg === '--help' || arg === '-h') {
       options.help = true

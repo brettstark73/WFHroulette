@@ -235,6 +235,7 @@ async function runTests() {
       ]
 
       for (const pattern of dangerousPatterns) {
+        // eslint-disable-next-line security/detect-non-literal-regexp -- Safe: test code with known patterns
         const regex = new RegExp(pattern)
         if (regex.test(html)) {
           throw new Error(`Potential XSS pattern found: ${pattern}`)

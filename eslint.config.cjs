@@ -14,6 +14,22 @@ const configs = [
       '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
+      '**/out/**',
+      '**/.next/**',
+      '**/coverage/**',
+      '**/.nyc_output/**',
+      '**/.cache/**',
+      '**/.eslintcache',
+      '**/.stylelintcache',
+      '**/*.tgz',
+      '**/package/**',
+      '**/*.log',
+      '**/.env',
+      '**/.env.*',
+      '**/.vscode/**',
+      '**/.idea/**',
+      '**/.DS_Store',
+      '**/Thumbs.db',
       '**/*.html', // HTML files can't be parsed by ESLint
       '.husky/**', // Git hooks
       '.vercel/**', // Deployment artifacts

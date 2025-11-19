@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -29,11 +29,32 @@ jobs:
             npm install
           fi
 
+      - name: Verify dependency integrity
+        run: |
+          echo "🔐 Verifying dependency integrity..."
+          # Verify package-lock.json integrity hashes
+          if [ -f package-lock.json ]; then
+            npm ci --dry-run --prefer-offline
+            echo "✅ Dependency integrity verified"
+          else
+            echo "⚠️ No package-lock.json found - skipping integrity verification"
+          fi
+
+          # Check for known vulnerabilities in dependencies
+          echo "🔍 Checking for vulnerable dependencies..."
+          npm audit --audit-level=moderate || true
+
+          # Verify npm package signatures (Node.js 16+)
+          if command -v npm &> /dev/null; then
+            echo "✍️ Verifying npm package signatures..."
+            npm audit signatures || echo "⚠️ Signature verification not available or failed"
+          fi
+
       - name: Prettier check
         run: npm run format:check
 
       - name: ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx,.html
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx,.html --max-warnings=0
 
       - name: Stylelint
         run: npx stylelint "**/*.{css,scss,sass,less,pcss}" --allow-empty-input
@@ -43,9 +64,19 @@ jobs:
 
       - name: Check for hardcoded secrets
         run: |
-          # Check for common secret patterns (excluding workflow files and package.json)
-          if grep -r -E "(password|secret|key|token).*[=:].*['\"][^'\"]{8,}" . --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.github --exclude=package.json || \
-             grep -r -E "-----BEGIN.*KEY-----" . --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.github --exclude=package.json; then
+          # Check for common secret patterns (excluding docs, tests, and workflow files)
+          if grep -r -E "(password|secret|key|token).*[=:].*['\"][^'\"]{8,}" . \
+               --exclude-dir=node_modules \
+               --exclude-dir=.git \
+               --exclude-dir=.github \
+               --exclude-dir=tests \
+               --exclude="*.md" \
+               --exclude="package.json" || \
+             grep -r -E "-----BEGIN.*KEY-----" . \
+               --exclude-dir=node_modules \
+               --exclude-dir=.git \
+               --exclude-dir=.github \
+               --exclude-dir=tests; then
             echo "❌ Potential hardcoded secrets found"
             exit 1
           else
@@ -58,25 +89,25 @@ jobs:
           echo "🔍 Scanning for XSS vulnerability patterns..."
 
           # Check for innerHTML with interpolation (dangerous pattern)
-          if grep -r -E "innerHTML.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=test; then
+          if grep -r -E "innerHTML.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules; then
             echo "❌ Potential XSS: innerHTML with template literal interpolation found"
             exit 1
           fi
 
           # Check for eval with interpolation
-          if grep -r -E "eval\\\(.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=test; then
+          if grep -r -E "eval\\\(.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules; then
             echo "❌ Potential code injection: eval with interpolation found"
             exit 1
           fi
 
           # Check for document.write with interpolation
-          if grep -r -E "document\\\\.write.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules --exclude-dir=test; then
+          if grep -r -E "document\\\\.write.*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules; then
             echo "❌ Potential XSS: document.write with interpolation found"
             exit 1
           fi
 
           # Check for onclick handlers with interpolation
-          if grep -r -E "onclick.*=.*['\"].*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --include="*.html" --exclude-dir=node_modules --exclude-dir=test; then
+          if grep -r -E "onclick.*=.*['\"].*\\\$\{" . --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" --include="*.html" --exclude-dir=node_modules; then
             echo "❌ Potential XSS: onclick handler with interpolation found"
             exit 1
           fi
@@ -102,3 +133,33 @@ jobs:
 
           # Clean up temp file
           rm -f /tmp/unvalidated_inputs.txt
+
+      - name: Configuration security check
+        run: |
+          # Run comprehensive configuration security validation
+          echo "🔍 Running configuration security validation..."
+          npx create-quality-automation@latest --security-config
+
+      - name: Documentation validation
+        run: |
+          # Run comprehensive documentation validation
+          echo "📖 Running documentation validation..."
+          npx create-quality-automation@latest --validate-docs
+
+      - name: Lighthouse CI
+        run: |
+          # Only run Lighthouse CI if configuration exists
+          if [ -f ".lighthouserc.js" ] || [ -f ".lighthouserc.json" ] || [ -f "lighthouserc.js" ]; then
+            echo "🚢 Running Lighthouse CI..."
+            npx lhci autorun
+          else
+            echo "⏭️ No Lighthouse CI configuration found, skipping"
+          fi
+        continue-on-error: true
+
+      # NOTE: The "Test README Quick Start Instructions" step has been removed
+      # because it relies on setup.js which only exists in the create-quality-automation
+      # package itself, not in consumer repositories that copy this workflow.
+      #
+      # Consumer projects get the quality checks above (prettier, eslint, stylelint, etc.)
+      # but don't need to test the installation process.

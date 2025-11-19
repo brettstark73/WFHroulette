@@ -38,6 +38,7 @@ const server = http.createServer((req, res) => {
     return
   }
 
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- Safe: filePath validated by path traversal check above
   fs.stat(filePath, (statErr, stats) => {
     if (statErr || !stats.isFile()) {
       res.writeHead(404)
@@ -46,8 +47,10 @@ const server = http.createServer((req, res) => {
     }
 
     const ext = path.extname(filePath).toLowerCase()
+    // eslint-disable-next-line security/detect-object-injection -- Safe: ext from path.extname, MIME_TYPES has default fallback
     const contentType = MIME_TYPES[ext] || 'application/octet-stream'
     res.writeHead(200, { 'Content-Type': contentType })
+    // eslint-disable-next-line security/detect-non-literal-fs-filename -- Safe: same validated filePath from above
     fs.createReadStream(filePath).pipe(res)
   })
 })

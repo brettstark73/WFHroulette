@@ -69,6 +69,7 @@ export function pickReason(
     ? `${seed}|${isoYear}|${isoWeek}|reason|${employeeId}`
     : `${seed}|${isoYear}|${isoWeek}|reason`
   const index = simpleHash(base) % reasons.length
+  // eslint-disable-next-line security/detect-object-injection -- Safe: index is bounded by modulo operation
   return reasons[index]
 }
 
