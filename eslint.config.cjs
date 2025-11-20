@@ -10,7 +10,14 @@ try {
 
 const configs = [
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/build/**'],
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/*.html', // HTML files can't be parsed by ESLint
+      '.husky/**', // Git hooks
+      '.vercel/**', // Deployment artifacts
+    ],
   },
   js.configs.recommended,
 ]
@@ -34,7 +41,7 @@ const securityRules = security
   ? {
       // Security rules from WFHroulette patterns - adjusted for build tools
       'security/detect-object-injection': 'warn', // Build tools often use dynamic object access
-      'security/detect-non-literal-regexp': 'error',
+      'security/detect-non-literal-regexp': 'warn', // Allow in tests for pattern validation
       'security/detect-unsafe-regex': 'error',
       'security/detect-buffer-noassert': 'error',
       'security/detect-child-process': 'warn', // Build tools may spawn processes

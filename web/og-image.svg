@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="diceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4338ca;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5b21b6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="200" cy="315" r="150" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="1000" cy="500" r="200" fill="rgba(255,255,255,0.05)"/>
+
+  <!-- Dice -->
+  <rect x="200" y="165" width="300" height="300" rx="40" fill="url(#diceGradient)"/>
+  <rect x="200" y="165" width="300" height="300" rx="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+
+  <!-- Dice dots (5) -->
+  <circle cx="260" cy="225" r="28" fill="white" opacity="0.95"/>
+  <circle cx="440" cy="225" r="28" fill="white" opacity="0.95"/>
+  <circle cx="350" cy="315" r="28" fill="white" opacity="0.95"/>
+  <circle cx="260" cy="405" r="28" fill="white" opacity="0.95"/>
+  <circle cx="440" cy="405" r="28" fill="white" opacity="0.95"/>
+
+  <!-- Text -->
+  <text x="580" y="280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="80" font-weight="800" fill="white">WFHroulette</text>
+  <text x="580" y="360" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="36" fill="rgba(255,255,255,0.9)">Pick your WFH day and get the</text>
+  <text x="580" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="36" fill="rgba(255,255,255,0.9)">perfect sarcastic excuse</text>
+</svg>

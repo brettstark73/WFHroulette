@@ -32,11 +32,13 @@ Then open the printed URL (usually <http://localhost:3000/web/>). Enter your see
 ## Testing
 
 **Run all tests:**
+
 ```bash
 npm test                 # Unit + integration tests
 ```
 
 **Run specific test suites:**
+
 ```bash
 npm run test:unit        # Core logic tests only
 npm run test:integration # Browser/server tests only
@@ -44,6 +46,7 @@ npm run test:ci          # CI-safe mode (skips integration if ports blocked)
 ```
 
 **Test coverage includes:**
+
 - Deterministic hashing and date calculations
 - ISO week handling and edge cases
 - Web server integration and asset loading
@@ -61,7 +64,7 @@ npm run test:ci          # CI-safe mode (skips integration if ports blocked)
 ```text
 WFH Day for seed "my-team" (ISO week 2025-W39)
   Thursday, 2025-09-25
-Excuse: My ergonomic chair was reassigned to a visiting consultant’s emotional support cactus.
+Excuse: My ergonomic chair was reassigned to a visiting consultant's emotional support cactus.
 ```
 
 ## License
