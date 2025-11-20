@@ -164,7 +164,7 @@ async function runTests() {
         throw new Error(`Script not accessible: ${scriptResponse.status}`)
       }
 
-      if (!scriptResponse.body.includes('pickWFHDay')) {
+      if (!scriptResponse.body.includes('pickReason')) {
         throw new Error('Script missing expected function imports')
       }
     })
