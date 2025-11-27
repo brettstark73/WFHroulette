@@ -1,5 +1,12 @@
 # Repository Guidelines
 
+## Pre-Action Checklist
+
+Before suggesting ANY infrastructure, CI/CD, or tooling changes:
+1. Run `ls .github/workflows/` to see existing workflows
+2. Run `cat package.json | grep scripts -A 50` to see available commands
+3. Check for `.qualityrc.json`, `CLAUDE.md`, or similar config files
+
 ## Project Structure & Module Organization
 
 - `src/` holds shared logic: `cli.js` is the entry point, `util.js` exposes deterministic hashing, ISO-week math, and formatting reused everywhere.
@@ -36,3 +43,22 @@
 - Vercel rewrites `/` to `/web/index.html`; ensure new shared modules remain reachable (the integration tests will flag missing assets).
 - The static server enforces path normalization—store new assets inside the repo root to keep that guard working.
 - For protected preview deployments, confirm unauthenticated visitors actually load `/web/app.js` and `/src/util.js`; without them the button appears dead despite HTML rendering.
+
+## Quality Automation (create-quality-automation)
+
+**IMPORTANT**: This project uses `create-quality-automation` for CI/CD quality gates. Before suggesting or creating ANY new GitHub Actions workflows for lint/test/security/formatting, you MUST first check:
+
+1. `.github/workflows/quality.yml` — already exists and handles all quality checks
+
+**DO NOT** create duplicate workflows. The existing workflow already handles:
+- ESLint with security rules
+- Prettier formatting checks
+- Test execution
+- Security audit (`npm audit`)
+
+**Available Commands** (use these instead of suggesting new workflows):
+- `npm test` — Run all tests
+- `npm run test:unit` — Unit tests only
+- `npm run test:ci` — CI-optimized test run
+
+**Before proposing CI/CD changes**: Run `ls .github/workflows/` and `cat .github/workflows/quality.yml` to understand what already exists.
