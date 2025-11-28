@@ -1,0 +1,3 @@
+# Smart Test Strategy - Risk-based pre-push validation
+# Analyzes changes and runs appropriate test tier
+bash scripts/smart-test-strategy.sh
