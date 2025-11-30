@@ -10,7 +10,7 @@ This guide explains how to set up social preview images for GitHub and web shari
 - Meta tags for Facebook, Twitter/X, LinkedIn, etc.
 - Proper dimensions: 1200x630px (recommended)
 
-When you share `https://wfh.aibuilderlab.com`, it will display the dice logo with branding.
+When you share `https://vibebuildlab.com`, it will display the dice logo with branding.
 
 ### Testing Web Sharing
 
@@ -78,7 +78,7 @@ convert -background none -size 1200x630 web/og-image.svg web/og-image.png
 
 ### Check Web App Preview
 
-1. Share this URL: https://wfh.aibuilderlab.com
+1. Share this URL: https://vibebuildlab.com
 2. Should show dice logo with "WFHroulette" text
 
 ## Alignment Strategy
