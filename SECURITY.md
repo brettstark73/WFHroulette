@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in WFHroulette, please email:
 
-**support@northwestregisteredagent.com**
+**security@vibebuildlab.com**
 
 Please do not open public issues for security vulnerabilities. We will work with you to assess and address the issue.
 
