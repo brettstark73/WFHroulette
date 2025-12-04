@@ -205,7 +205,7 @@ npm run web
 
 ### Tests fail on CI but pass locally
 
-- Check Node.js version: `node --version` (should be 18+)
+- Check Node.js version: `node --version` (should be 20+)
 - Clear node_modules: `rm -rf node_modules && npm install`
 - Check for port conflicts: `lsof -i :4173`
 

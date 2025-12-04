@@ -62,7 +62,7 @@ wfhroulette --seed my-team --date 2025-09-25
 ## Deploying Web Application
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 20+
 - Port 4173 available (configurable via `PORT` env var)
 
 ### Local Deployment
