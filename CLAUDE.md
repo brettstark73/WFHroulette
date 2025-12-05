@@ -71,7 +71,7 @@ npm install              # Install (no dependencies, but sets up package)
 npm link                 # Make CLI globally available as 'wfhroulette'
 npm start               # Run CLI with default settings
 npm run web             # Start web server on port 4173
-npm test                # Show CLI help (basic test)
+npm test                # Run all tests (unit + integration)
 ```
 
 ### Testing & Validation

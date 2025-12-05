@@ -33,7 +33,7 @@ GitHub is auto-generating a generic image. To use our custom dice logo:
 
 #### Option 1: Upload via GitHub Web (Recommended)
 
-1. Go to: https://github.com/brettstark73/WFHroulette/settings
+1. Go to: https://github.com/vibebuildlab/wfhroulette/settings
 2. Scroll to "Social preview" section
 3. Click "Edit"
 4. Upload `web/og-image.svg` (or create a PNG version)
@@ -73,7 +73,7 @@ convert -background none -size 1200x630 web/og-image.svg web/og-image.png
 
 ### Check GitHub Preview
 
-1. Share this URL anywhere: https://github.com/brettstark73/WFHroulette
+1. Share this URL anywhere: https://github.com/vibebuildlab/wfhroulette
 2. Should show custom dice image (after you upload in settings)
 
 ### Check Web App Preview

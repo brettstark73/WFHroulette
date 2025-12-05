@@ -50,7 +50,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 
 ### Installation
 
@@ -84,7 +84,7 @@ wfhroulette --seed my-team --date 2025-09-25
 npm run web
 ```
 
-Open the printed URL (usually http://localhost:3000/web/). Enter your seed and optional date, hit **Pick**, and bask in your sanctioned remote day and excuse.
+Open the printed URL (usually http://localhost:4173/web/). Enter your seed and optional date, hit **Pick**, and bask in your sanctioned remote day and excuse.
 
 ## Usage Example
 
