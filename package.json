@@ -19,6 +19,7 @@
     "security:audit": "npm audit --audit-level high",
     "security:secrets": "node -e \"const fs=require('fs');const content=fs.readFileSync('package.json','utf8');if(/[\\\"\\'][a-zA-Z0-9+/]{20,}[\\\"\\']/.test(content)){console.error('❌ Potential hardcoded secrets in package.json');process.exit(1)}else{console.log('✅ No secrets detected in package.json')}\"",
     "lint": "eslint . --ext .js,.jsx,.mjs,.cjs,.html && stylelint \"**/*.{css,scss,sass,less,pcss}\" --allow-empty-input",
+    "type-check": "tsc --noEmit",
     "lint:fix": "eslint . --ext .js,.jsx,.mjs,.cjs,.html --fix && stylelint \"**/*.{css,scss,sass,less,pcss}\" --fix --allow-empty-input",
     "prepare": "husky",
     "security:config": "npx create-quality-automation@latest --security-config",
@@ -30,7 +31,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20",
     "husky": "^9.1.4",
+    "typescript": "^5",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "eslint": "^9.12.0",
