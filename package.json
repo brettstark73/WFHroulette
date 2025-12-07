@@ -40,7 +40,7 @@
     "eslint-plugin-security": "^3.0.1",
     "globals": "^15.9.0",
     "stylelint": "^16.8.0",
-    "stylelint-config-standard": "^37.0.0",
+    "stylelint-config-standard": "^39.0.1",
     "@lhci/cli": "^0.14.0"
   },
   "lint-staged": {
