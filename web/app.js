@@ -1,6 +1,17 @@
 import { pickReason, isoWeekInfo } from '../src/util.js'
 
-let dayInput, seedInput, employeeIdInput, dateInput, resultEl, button
+/** @type {HTMLSelectElement} */
+let dayInput
+/** @type {HTMLInputElement} */
+let seedInput
+/** @type {HTMLInputElement} */
+let employeeIdInput
+/** @type {HTMLInputElement} */
+let dateInput
+/** @type {HTMLElement} */
+let resultEl
+/** @type {HTMLButtonElement} */
+let button
 
 const FALLBACK_REASONS = [
   'The espresso machine unionized again and refuses to froth without a formal escalation.',
@@ -97,12 +108,30 @@ function renderResult(selectedDay, seed, baseDate, employeeId = null) {
 }
 
 function init() {
-  dayInput = document.getElementById('day')
-  seedInput = document.getElementById('seed')
-  employeeIdInput = document.getElementById('employee-id')
-  dateInput = document.getElementById('date')
-  resultEl = document.getElementById('result')
-  button = document.getElementById('pick')
+  const dayEl = document.getElementById('day')
+  const seedEl = document.getElementById('seed')
+  const employeeIdEl = document.getElementById('employee-id')
+  const dateEl = document.getElementById('date')
+  const resultElRaw = document.getElementById('result')
+  const buttonEl = document.getElementById('pick')
+
+  if (
+    !dayEl ||
+    !seedEl ||
+    !employeeIdEl ||
+    !dateEl ||
+    !resultElRaw ||
+    !buttonEl
+  ) {
+    throw new Error('Required elements are missing from the page.')
+  }
+
+  dayInput = /** @type {HTMLSelectElement} */ (dayEl)
+  seedInput = /** @type {HTMLInputElement} */ (seedEl)
+  employeeIdInput = /** @type {HTMLInputElement} */ (employeeIdEl)
+  dateInput = /** @type {HTMLInputElement} */ (dateEl)
+  resultEl = resultElRaw
+  button = /** @type {HTMLButtonElement} */ (buttonEl)
 
   dateInput.value = currentDateISO()
   loadReasons()

@@ -2,6 +2,11 @@
 
 Practical notes for contributing to WFHroulette. Keep changes small, deterministic, and testable.
 
+## AI Prompt Source
+
+- `CLAUDE.md` is the canonical assistant prompt for the project. Update that file first when changing AI guidance.
+- Codex (and other LLMs) should read `CLAUDE.md` in addition to this file to stay aligned with the latest instructions.
+
 ## Project Structure & Module Organization
 
 - `src/cli.js` is the CLI entry; `src/util.js` holds all deterministic selection logic shared by CLI and web.

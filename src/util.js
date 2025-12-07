@@ -22,7 +22,8 @@ export function isoWeekInfo(input = new Date()) {
 
   const year = target.getUTCFullYear()
   const yearStart = new Date(Date.UTC(year, 0, 1))
-  const week = Math.ceil(((target - yearStart) / 86400000 + 1) / 7)
+  const daysSinceYearStart = (target.getTime() - yearStart.getTime()) / 86400000
+  const week = Math.ceil((daysSinceYearStart + 1) / 7)
 
   const firstMonday = new Date(Date.UTC(year, 0, 4))
   const firstMondayDay = firstMonday.getUTCDay() || 7
