@@ -39,12 +39,12 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Tech Stack
 
-| Component | Technology |
-|-----------|------------|
-| **Runtime** | Node.js |
+| Component    | Technology                      |
+| ------------ | ------------------------------- |
+| **Runtime**  | Node.js                         |
 | **Frontend** | Vanilla JavaScript (ES modules) |
-| **Server** | Simple static file server |
-| **Testing** | Custom test runner |
+| **Server**   | Simple static file server       |
+| **Testing**  | Custom test runner              |
 
 ## Getting Started
 
@@ -73,6 +73,7 @@ wfhroulette --seed my-team --date 2025-09-25
 ```
 
 **Options:**
+
 - `--seed <value>` - Team, project, or inside joke to feed the hash (default: `default`)
 - `--date YYYY-MM-DD` - Anchor date for the ISO week (default: today)
 - `--json` - Emit machine-readable JSON
@@ -98,13 +99,13 @@ Excuse: My ergonomic chair was reassigned to a visiting consultant's emotional s
 
 ## Development Commands
 
-| Command | Purpose |
-|---------|---------|
-| `npm start` | Run CLI with defaults |
-| `npm run web` | Start web server |
-| `npm test` | Run all tests |
-| `npm run test:unit` | Core logic tests |
-| `npm run test:integration` | Browser/server tests |
+| Command                    | Purpose               |
+| -------------------------- | --------------------- |
+| `npm start`                | Run CLI with defaults |
+| `npm run web`              | Start web server      |
+| `npm test`                 | Run all tests         |
+| `npm run test:unit`        | Core logic tests      |
+| `npm run test:integration` | Browser/server tests  |
 
 ## Project Structure
 
@@ -130,14 +131,7 @@ WFHroulette/
 
 ## Roadmap
 
-- [x] Deterministic day selection
-- [x] CLI tool
-- [x] Web interface
-- [x] Sarcastic excuses
-- [x] Security fixes (XSS protection)
-- [ ] Slack integration
-- [ ] Calendar export (.ics)
-- [ ] Team dashboard
+See [ROADMAP.md](ROADMAP.md) for planned features and strategic direction.
 
 ## Contributing
 
