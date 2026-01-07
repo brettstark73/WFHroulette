@@ -3,6 +3,7 @@
 ## Overview
 
 WFHroulette can be deployed as:
+
 1. **npm package** - Command-line tool for developers
 2. **Web application** - Static site with Node.js server
 3. **Vercel** - Serverless deployment (pre-configured)
@@ -27,6 +28,7 @@ npm test
 ## Deploying as npm Package
 
 ### Prerequisites
+
 - npm account
 - Bump version in `package.json`
 - Update `CHANGELOG.md`
@@ -62,6 +64,7 @@ wfhroulette --seed my-team --date 2025-09-25
 ## Deploying Web Application
 
 ### Prerequisites
+
 - Node.js 20+
 - Port 4173 available (configurable via `PORT` env var)
 
@@ -99,18 +102,21 @@ pm2 start web/server.js --name wfhroulette --env "PORT=3000"
 WFHroulette is pre-configured for Vercel deployment.
 
 ### Prerequisites
+
 - Vercel account
 - Project connected to GitHub
 
 ### One-Click Deployment
 
 Option 1: Deploy from GitHub
+
 ```bash
 # Push to GitHub, then visit:
 # https://vercel.com/new and select the WFHroulette repository
 ```
 
 Option 2: Deploy with Vercel CLI
+
 ```bash
 npm install -g vercel
 vercel login
