@@ -25,7 +25,7 @@ Please do not open public issues for security vulnerabilities. We will work with
 ## Supported Versions
 
 | Version | Supported |
-|---------|-----------|
+| ------- | --------- |
 | Latest  | ✓ Yes     |
 | Older   | ✗ No      |
 

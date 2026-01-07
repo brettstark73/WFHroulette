@@ -44,6 +44,7 @@ npm run test:integration  # Integration tests only
 ### Bug Reports
 
 Please open an issue with:
+
 - Clear description of the bug
 - Steps to reproduce
 - Expected vs. actual behavior

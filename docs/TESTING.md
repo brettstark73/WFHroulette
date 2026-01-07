@@ -27,22 +27,26 @@ npm run test:ci
 Tests core business logic functions in isolation. **12 tests** covering:
 
 #### Hash Function Tests
+
 - `testHashConsistency()` - Same input always produces same hash
 - `testHashEdgeCases()` - Null, undefined, and empty string handling
 - `testHashDistribution()` - Different inputs produce different hashes
 
 #### ISO Week Calculation Tests
+
 - `testISOWeekCalculation()` - Correct week/year for known dates
 - `testISOWeekBoundaries()` - Year transitions (Dec/Jan boundaries)
 - `testMondayDateCorrectness()` - Monday is always first day of ISO week
 
 #### WFH Day Selection Tests
+
 - `testPickWFHDayDeterministic()` - Same seed+date = same day
 - `testPickWFHDayIsWeekday()` - Always Mon-Fri, never weekends
 - `testPickWFHDayDifferentSeeds()` - Different seeds produce different days
 - `testPickWFHDayDateHandling()` - Works with Date objects and ISO strings
 
 #### Reason Selection Tests
+
 - `testPickReasonDeterministic()` - Same seed+week = same reason
 - `testFormatDayOutput()` - Correct date formatting
 
@@ -51,18 +55,22 @@ Tests core business logic functions in isolation. **12 tests** covering:
 Tests end-to-end functionality with server interaction. **7 tests** covering:
 
 #### Server Lifecycle Tests
+
 - `testServerStartsAndShuts()` - Server starts on correct port and shuts down cleanly
 - `testStaticFileServing()` - Static files are served with correct paths and MIME types
 
 #### HTML/DOM Tests
+
 - `testIndexHTMLStructure()` - Required HTML elements are present
 - `testFormElementsPresent()` - Form inputs for seed and date exist
 - `testButtonLabelsCorrect()` - UI buttons have expected text
 
 #### HTTP Response Tests
+
 - `testHTTPStatusCodes()` - Correct status codes (200 for found, 404 for missing)
 
 #### Security Tests
+
 - `testNoXSSVulnerabilities()` - Static content doesn't contain XSS patterns like `innerHTML` or dangerous event handlers
 
 ## Test Environment
@@ -70,6 +78,7 @@ Tests end-to-end functionality with server interaction. **7 tests** covering:
 ### Custom Test Runner (`test/test-runner.js`)
 
 Simple, zero-dependency test harness with:
+
 - Assertion functions (assert, assertEquals, assertTrue, assertFalse)
 - Test registration and execution
 - Color-coded output (green for pass, red for fail)
@@ -79,6 +88,7 @@ Simple, zero-dependency test harness with:
 ### Browser Testing
 
 Integration tests use:
+
 - Node.js `http` module for server interaction
 - `Playwright` (if available) for browser automation
 - Graceful fallback for sandboxed environments
@@ -92,7 +102,10 @@ Verify that same inputs always produce same outputs:
 ```javascript
 const day1 = pickWFHDay('team-a', new Date('2025-09-25'))
 const day2 = pickWFHDay('team-a', new Date('2025-09-25'))
-assert(day1.getTime() === day2.getTime(), 'Same seed and date should produce same day')
+assert(
+  day1.getTime() === day2.getTime(),
+  'Same seed and date should produce same day'
+)
 ```
 
 ### Edge Case Tests
@@ -131,6 +144,7 @@ testPickWFHDayIsWeekday() {
 ### CI-Safe Testing
 
 Tests skip integration tests gracefully when:
+
 - Port 4173 is already in use (EADDRINUSE)
 - Permission denied (EACCES)
 - General permission error (EPERM)
@@ -163,6 +177,7 @@ test('myNewFeature', () => {
 ## Test Coverage
 
 Current coverage:
+
 - **Core logic**: 100% (all functions have tests)
 - **Error handling**: Covered in unit tests
 - **Security**: XSS scanning in integration tests
