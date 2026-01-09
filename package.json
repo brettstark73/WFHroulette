@@ -27,7 +27,22 @@
     "lighthouse:upload": "lhci upload",
     "validate:docs": "npx create-quality-automation@latest --validate-docs",
     "validate:comprehensive": "npx create-quality-automation@latest --comprehensive",
-    "validate:all": "npm run validate:comprehensive && npm run security:audit"
+    "validate:all": "npm run validate:comprehensive && npm run security:audit",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "validate:pre-push": "npm run test:patterns --if-present && npm run lint && npm run format:check && npm run test:commands --if-present && npm test --if-present",
+    "type-check:tests": "tsc --noEmit --project tests/tsconfig.json",
+    "type-check:all": "npm run type-check && npm run type-check:tests",
+    "quality:check": "npm run type-check:all && npm run lint && npm run test",
+    "quality:ci": "npm run quality:check && npm run security:audit",
+    "test:fast": "vitest run --reporter=basic --coverage=false",
+    "test:medium": "vitest run --reporter=basic --testPathIgnorePatterns=e2e,integration",
+    "test:comprehensive": "vitest run && npm run lint && npm run format:check && npm run security:audit 2>/dev/null || true",
+    "test:smart": "bash scripts/smart-test-strategy.sh",
+    "size": "size-limit",
+    "size:why": "size-limit --why",
+    "test:a11y": "vitest run tests/accessibility.test.js",
+    "test:coverage:check": "vitest run --coverage --coverage.thresholds.lines=70 --coverage.thresholds.functions=70"
   },
   "license": "MIT",
   "devDependencies": {
@@ -41,7 +56,16 @@
     "globals": "^15.9.0",
     "stylelint": "^16.8.0",
     "stylelint-config-standard": "^37.0.0",
-    "@lhci/cli": "^0.14.0"
+    "@lhci/cli": "^0.14.0",
+    "vitest": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.8",
+    "@typescript-eslint/eslint-plugin": "^8.9.0",
+    "@typescript-eslint/parser": "^8.9.0",
+    "size-limit": "^11.0.0",
+    "@size-limit/file": "^11.0.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "axe-core": "^4.10.0"
   },
   "lint-staged": {
     "package.json": [
@@ -56,6 +80,20 @@
     ],
     "**/*.{css,scss,sass,less,pcss}": [
       "stylelint --fix",
+      "prettier --write"
+    ],
+    "**/*.{js,jsx,ts,tsx,mjs,cjs,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{ts,tsx}": [
+      "tsc --noEmit --skipLibCheck",
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "tests/**/*.{ts,tsx,js,jsx}": [
+      "tsc --noEmit --project tests/tsconfig.json",
+      "eslint --fix",
       "prettier --write"
     ]
   },
