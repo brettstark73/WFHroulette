@@ -21,7 +21,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.cjs,.html && stylelint \"**/*.{css,scss,sass,less,pcss}\" --allow-empty-input",
     "type-check": "tsc --noEmit",
     "lint:fix": "eslint . --ext .js,.jsx,.mjs,.cjs,.html --fix && stylelint \"**/*.{css,scss,sass,less,pcss}\" --fix --allow-empty-input",
-    "prepare": "husky",
+    "prepare": "[ \"$CI\" = \"true\" ] && echo 'Skipping Husky in CI' || husky",
     "security:config": "npx create-quality-automation@latest --security-config",
     "lighthouse:ci": "lhci autorun",
     "lighthouse:upload": "lhci upload",
@@ -103,5 +103,15 @@
   "volta": {
     "node": "20.11.1",
     "npm": "10.2.4"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "dist/**/*.js",
+      "limit": "250 kB"
+    },
+    {
+      "path": "dist/**/*.css",
+      "limit": "50 kB"
+    }
+  ]
 }
